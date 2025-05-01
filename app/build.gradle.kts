@@ -18,7 +18,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs.kotlin")
-    id("com.google.devtools.ksp") version "2.1.0-1.0.29"
+    id("com.google.devtools.ksp") version "2.1.20-2.0.1"
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
@@ -61,14 +61,14 @@ android {
 }
 
 dependencies {
-    implementation(platform("androidx.compose:compose-bom:2024.12.01"))
+    implementation(platform("androidx.compose:compose-bom:2025.04.01"))
 
-    implementation("androidx.activity:activity-compose:1.9.3")
+    implementation("androidx.activity:activity-compose:1.10.1")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("androidx.compose.material3:material3")
-    implementation("androidx.constraintlayout:constraintlayout:2.2.0")
-    implementation("androidx.core:core-ktx:1.15.0")
-    implementation("androidx.fragment:fragment-ktx:1.8.5")
+    implementation("androidx.constraintlayout:constraintlayout:2.2.1")
+    implementation("androidx.core:core-ktx:1.16.0")
+    implementation("androidx.fragment:fragment-ktx:1.8.6")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.lifecycle:lifecycle-livedata-core-ktx:${rootProject.extra["arch_lifecycle_version"]}")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:${rootProject.extra["arch_lifecycle_version"]}")
