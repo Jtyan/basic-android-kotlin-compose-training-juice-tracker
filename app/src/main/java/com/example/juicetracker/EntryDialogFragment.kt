@@ -9,12 +9,14 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.juicetracker.data.JuiceColor
 import com.example.juicetracker.databinding.FragmentEntryDialogBinding
 import com.example.juicetracker.ui.AppViewModelProvider
 import com.example.juicetracker.ui.EntryViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.launch
 
 class EntryDialogFragment : BottomSheetDialogFragment() {
 
@@ -49,6 +51,24 @@ class EntryDialogFragment : BottomSheetDialogFragment() {
         )
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinner.adapter = spinnerAdapter
+
+        // Pre-populate fields when editing an existing item
+        if (juiceId != 0L ) {
+            //
+            viewLifecycleOwner.lifecycleScope.launch {
+                entryViewModel.getJuiceStream(juiceId).collect { juice ->
+                    juice?.let {
+                        binding.editJuiceName.setText(it.name)
+                        binding.editJuiceDescription.setText(it.description)
+                        binding.ratingBar.rating = it.rating.toFloat()
+
+                        val colorPosition = colorOptions.indexOf(it.color)
+                        binding.spinner.setSelection(colorPosition)
+                    }
+                }
+            }
+            validateInputs(binding, selectedColor)
+        }
 
         binding.editJuiceName.addTextChangedListener() {
             validateInputs(binding, selectedColor)
@@ -96,6 +116,3 @@ class EntryDialogFragment : BottomSheetDialogFragment() {
         binding.buttonSave.isEnabled = isNameFilled && selectedColor != null
     }
 }
-
-
-
