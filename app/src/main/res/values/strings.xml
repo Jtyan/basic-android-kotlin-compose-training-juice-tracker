@@ -30,4 +30,5 @@
     <string name="cyan">Cyan</string>
     <string name="yellow">Yellow</string>
     <string name="magenta">Magenta</string>
+    <string name="cancel">Cancel</string>
 </resources>
